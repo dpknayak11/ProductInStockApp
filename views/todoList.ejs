@@ -1,0 +1,59 @@
+<%- include('includes/head.ejs') %> <!-- Include the head partial -->
+</head>
+<body>
+    <div class="form">
+        <h1>Product in Stock App</h1>
+        <form class="product-form"
+                action="/<%= isEdit ? 'update-todoList' : 'add-todoList' %>" method="POST">
+            <div class="form-control">
+                <label for="name">Product Name:</label>
+                <input type="text" name="name" id="name" value="<%= isEdit ? todoLists.name : '' %>">
+            </div> 
+            <div class="form-control">
+                <label for="title">Description:</label>
+                <input type="text" name="description" id="description" value="<%= isEdit ? todoLists.description : '' %>" >
+            </div>              
+            <% if(isEdit){ %>
+                <input type="hidden" value="<%= todoLists.id %>" name="todoListId">
+             <% } %> 
+            <button class="button" type="submit"> <%= isEdit ? 'Save Changes' : 'Add' %> </button>
+        </form>
+    </div>
+
+    <div class="container">
+    <% if (todoLists.length > 0) { %>
+        <% for (let todoList of todoLists) { %> 
+            <div class="user-container">
+                <div class="user-info"> <%= todoList.name %>  -  <%= todoList.description %> </div> 
+                <div class="user-buttons">            
+                    <form action="/delete-todoList" method="POST" > 
+                        <a href="/edit-todoList/<%= todoList.id %>?isEditing=true" class="button">Edit</a>
+                            <input type="hidden" value="<%= todoList.id %>" name="todoListId" /> <!-- Use a hidden input to pass the data id -->
+                            <button type="submit" class="button">Remove</button>
+                        </form>
+                        <form action="/saveData" method="POST" > 
+                            <input type="hidden" value="<%= todoList.id %>" name="todoListId" /> 
+                            <button type="submit" class="button">Save Data</button>
+                        </form>
+                </div>
+            </div>
+         <% } %>
+        <% } else { %> 
+       <h1>No data Found. &#128531;</h1> 
+    <% } %>  
+   </div>
+
+<div class="container">
+   <h2><u>Save Data:</u></h2>
+    <form action="/delete-savedata" method="POST">
+        <button type="submit" class="button">Delete Save Data</button>
+    </form>
+        <% if (saveDatas.length > 0) { %> 
+            <% for (let saveData of saveDatas) { %>     
+                     <p class="lastdeta"><%= saveData.name %>  -  <%= saveData.description %></p>
+                        <% } %>
+        <% } else { %>
+        <h1>No Save Data Found. &#128531;</h1> 
+        <% } %>
+</div>
+<%- include('includes/end.ejs') %> <!-- Include the end partial -->
