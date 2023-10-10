@@ -5,5 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><%= pageTitle %></title>
+    <title>
+        <%= pageTitle %>
+    </title>
     <link rel="stylesheet" href="/css/all.css">
+    <style>
+        @media (max-width: 770px) {
+            *{
+                font-size: 20px;
+            }
+            .container {
+                height: auto;
+                margin: 5px;
+                width: 95%;
+            }
+
+            .product-form {
+                margin: 0 auto;
+                width: 95%;
+            }
+
+            .user-buttons {
+                display: inline;
+                gap: 10px;
+                text-align: end;
+            }
+        }
+    </style>
