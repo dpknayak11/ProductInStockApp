@@ -25,8 +25,8 @@ app.use(errorcontroller.get404);
 const port = process.env.PORT;
 
 sequelizedb
-.sync()
-// .sync({force: true})
+// .sync()
+.sync({force: true})
 .then(() => { 
    app.listen(port , ()=> console.log(`Listening on ${port}`));
  })
